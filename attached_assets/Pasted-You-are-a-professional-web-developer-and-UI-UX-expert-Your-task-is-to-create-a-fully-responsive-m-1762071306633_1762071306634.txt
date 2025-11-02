@@ -1,0 +1,80 @@
+You are a professional web developer and UI/UX expert. 
+Your task is to create a fully responsive, modern, SEO-optimized website named **AIBlaze**. 
+
+🎯 WEBSITE THEME & GOAL:
+AIBlaze is a blog website focused on the niche **AI + Money** — teaching people how to earn using AI tools, automation, and smart digital systems. 
+The website should feel futuristic, human-psychology-driven, and emotionally engaging — designed to make visitors stay, scroll, and trust the brand.
+
+🎨 DESIGN STYLE:
+- Futuristic + Clean + Motivational aesthetic
+- Soft gradients with shades of **blue, purple, and white**
+- Rounded corners, card-based blog layout
+- Animated glow or hover effects (minimal but premium)
+- Sticky navbar with logo “AIBlaze 🔥”
+- Smooth scroll & fade-in animations for better retention
+- Use elegant typography (e.g., Poppins, Inter, or Space Grotesk)
+- Include a subtle dark mode toggle
+
+📄 PAGES TO INCLUDE:
+1. **Home Page**
+   - Hero Section: Headline like “Ignite Your Earnings with AI 🔥”
+   - Subtext: “Learn how to make money smarter, not harder — powered by AI.”
+   - CTA Button: “Read Blogs” → links to `/blogs`
+   - Show 3 featured blogs in attractive cards with images
+   - Short section about “Why AIBlaze?” with 3 key points (Learn, Earn, Grow)
+   - Footer with social links and copyright
+
+2. **Blogs Page (/blogs)**
+   - Dynamic blog cards layout (image, title, short intro, “Read More” button)
+   - Each blog opens to a **beautiful blog detail page**
+   - Related blogs section below each post
+
+3. **About Page (/about)**
+   - Brief story of AIBlaze
+   - Mission: “To empower creators, students, and freelancers to build digital income streams using AI.”
+   - Add a clean photo or abstract background
+
+4. **Contact Page (/contact)**
+   - Simple form: Name, Email, Message
+   - Minimal validation + success message
+
+🧠 CONTENT GUIDELINES:
+Preload 10 sample blog titles (as placeholder posts):
+1. 10 Best AI Tools to Earn Money in 2025  
+2. How Students Can Use AI to Make ₹10,000/Month  
+3. Top Free AI Websites Every YouTuber Should Know  
+4. How to Start Freelancing with ChatGPT  
+5. 5 AI Chrome Extensions That Save Hours of Work  
+6. AI vs Human Creativity — Who Wins?  
+7. How I Created a Full Website Using AI in 30 Minutes  
+8. 7 AI Tools That Can Replace Employees  
+9. The Future of Jobs: AI Skills That Pay the Most  
+10. How to Build a Personal Brand Using AI  
+
+Each blog should have:
+- Hero image (royalty-free AI-related)
+- Structured HTML headings (H1, H2, etc.)
+- SEO-friendly meta tags (title, description, keywords)
+- Share buttons (Twitter, LinkedIn, Copy Link)
+
+⚙️ TECHNICAL REQUIREMENTS:
+- No backend needed (static site)
+- Use markdown/JSON/blogs folder to store content
+- Auto-update blog list from folder
+- Responsive on mobile & desktop
+- Fast loading speed (optimized images)
+- Ready for AdSense approval
+- Include favicon and open graph meta
+
+💡 HUMAN PSYCHOLOGY OPTIMIZATION:
+- Emotionally warm color palette (trust + excitement)
+- Visual storytelling sections (icons, quotes, highlights)
+- Encourage visitors to take micro-actions (scroll, click, read another blog)
+- Keep interface minimalist to reduce cognitive load
+
+📈 FUTURE READY:
+- Easy to integrate future newsletter or SaaS tools
+- Simple file structure for migration to GitHub Pages or Supabase
+- Optimized for Google indexing and Core Web Vitals
+
+Final output: Fully responsive HTML/CSS/JS-based static website folder for **AIBlaze** ready to deploy.
