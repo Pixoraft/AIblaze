@@ -7,18 +7,31 @@ import { Badge } from "@/components/ui/badge";
 import type { Blog } from "@shared/schema";
 import { useEffect, useState, useMemo } from "react";
 import { Search, X } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Blogs() {
   const { data: blogs, isLoading } = useQuery<Blog[]>({
     queryKey: ["/api/blogs"],
   });
-
+  
+  const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "All Blogs - AIBlaze";
-  }, []);
+    
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get("search");
+    const categoryParam = params.get("category");
+    
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [location]);
 
   const categories = useMemo(() => {
     if (!blogs) return [];

@@ -10,6 +10,13 @@ import type { Blog } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 
+const getImageUrl = (imagePath: string): string => {
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  return imagePath;
+};
+
 export default function BlogDetail() {
   const [, params] = useRoute("/blog/:slug");
   const { toast } = useToast();
@@ -111,7 +118,7 @@ export default function BlogDetail() {
       {/* Hero Image */}
       <div className="w-full aspect-video max-w-6xl mx-auto mb-12 overflow-hidden rounded-2xl">
         <img
-          src={blog.imagePath}
+          src={getImageUrl(blog.imagePath)}
           alt={blog.title}
           className="w-full h-full object-cover"
           data-testid="img-blog-hero"

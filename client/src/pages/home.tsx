@@ -21,6 +21,53 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slides, setSlides] = useState<Slide[]>([]);
 
+  const particlePositions = useState(() => 
+    [...Array(20)].map(() => ({
+      size: Math.random() * 6 + 2,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: Math.random() * 10 + 10,
+    }))
+  )[0];
+
+  const shapePositions = useState(() =>
+    [...Array(8)].map((_, i) => ({
+      width: Math.random() * 80 + 40,
+      height: Math.random() * 80 + 40,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 3,
+      duration: Math.random() * 15 + 10,
+      rotateX: Math.random() * 360,
+      rotateY: Math.random() * 360,
+      colorVariant: i % 3,
+    }))
+  )[0];
+
+  const whyDecoPositions = useState(() =>
+    [...Array(5)].map((_, i) => ({
+      width: Math.random() * 150 + 100,
+      height: Math.random() * 150 + 100,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: i * 2,
+      duration: 20 + i * 5,
+    }))
+  )[0];
+
+  const ctaDecoPositions = useState(() =>
+    [...Array(6)].map((_, i) => ({
+      width: Math.random() * 100 + 50,
+      height: Math.random() * 100 + 50,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: i * 1.5,
+      duration: 15 + i * 3,
+      isCircle: i % 2 === 0,
+    }))
+  )[0];
+
   useEffect(() => {
     setMounted(true);
     fetch('/slide.json')
@@ -79,23 +126,45 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/80 to-pink-900/80" />
             </div>
 
-            {/* Floating Particles Animation */}
-            <div className="absolute inset-0 overflow-hidden">
-              {[...Array(20)].map((_, i) => (
+            {/* Floating Particles and 3D Shapes Animation */}
+            <div className="absolute inset-0 overflow-hidden" style={{ perspective: '1000px' }}>
+              {particlePositions.map((particle, i) => (
                 <div
                   key={i}
                   className={`absolute rounded-full bg-white/20 ${
                     mounted ? "animate-float" : ""
                   }`}
                   style={{
-                    width: `${Math.random() * 6 + 2}px`,
-                    height: `${Math.random() * 6 + 2}px`,
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 5}s`,
-                    animationDuration: `${Math.random() * 10 + 10}s`,
+                    width: `${particle.size}px`,
+                    height: `${particle.size}px`,
+                    left: `${particle.left}%`,
+                    top: `${particle.top}%`,
+                    animationDelay: `${particle.delay}s`,
+                    animationDuration: `${particle.duration}s`,
                   }}
                 />
+              ))}
+              {/* 3D Geometric Shapes */}
+              {shapePositions.map((shape, i) => (
+                <div
+                  key={`shape-${i}`}
+                  className={`absolute ${mounted ? "animate-3d-rotate" : ""}`}
+                  style={{
+                    width: `${shape.width}px`,
+                    height: `${shape.height}px`,
+                    left: `${shape.left}%`,
+                    top: `${shape.top}%`,
+                    animationDelay: `${shape.delay}s`,
+                    animationDuration: `${shape.duration}s`,
+                    transform: `rotateX(${shape.rotateX}deg) rotateY(${shape.rotateY}deg)`,
+                  }}
+                >
+                  <div 
+                    className={`w-full h-full ${shape.colorVariant === 0 ? 'rounded-lg' : shape.colorVariant === 1 ? 'rounded-full' : ''} 
+                    bg-gradient-to-br ${shape.colorVariant === 0 ? 'from-blue-400/20 to-purple-400/20' : shape.colorVariant === 1 ? 'from-pink-400/20 to-orange-400/20' : 'from-cyan-400/20 to-blue-400/20'} 
+                    border border-white/10 backdrop-blur-sm`}
+                  />
+                </div>
               ))}
             </div>
 
@@ -209,10 +278,31 @@ export default function Home() {
 
       {/* Why AIBlaze Section */}
       <section
-        className="py-24 px-6 bg-gradient-to-b from-transparent via-primary/5 to-transparent"
+        className="relative py-24 px-6 bg-gradient-to-b from-transparent via-primary/5 to-transparent overflow-hidden"
         data-testid="section-why-aiblaze"
+        style={{ perspective: '1000px' }}
       >
-        <div className="max-w-7xl mx-auto">
+        {/* 3D Background Decorations */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {mounted && whyDecoPositions.map((deco, i) => (
+            <div
+              key={`deco-${i}`}
+              className="absolute animate-3d-rotate opacity-10"
+              style={{
+                width: `${deco.width}px`,
+                height: `${deco.height}px`,
+                left: `${deco.left}%`,
+                top: `${deco.top}%`,
+                animationDelay: `${deco.delay}s`,
+                animationDuration: `${deco.duration}s`,
+              }}
+            >
+              <div className="w-full h-full rounded-xl bg-gradient-to-br from-primary/30 to-purple-500/30 border border-primary/20" />
+            </div>
+          ))}
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Why AIBlaze?
@@ -224,8 +314,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Learn */}
-            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
                 <GraduationCap className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold mb-4" data-testid="text-why-learn-title">
@@ -238,8 +328,8 @@ export default function Home() {
             </Card>
 
             {/* Earn */}
-            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
                 <DollarSign className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold mb-4" data-testid="text-why-earn-title">
@@ -252,8 +342,8 @@ export default function Home() {
             </Card>
 
             {/* Grow */}
-            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center">
+            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center shadow-lg">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold mb-4" data-testid="text-why-grow-title">
@@ -269,9 +359,29 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6" data-testid="section-cta">
-        <div className="max-w-4xl mx-auto text-center">
-          <Card className="p-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 border-none text-white">
+      <section className="relative py-24 px-6 overflow-hidden" data-testid="section-cta" style={{ perspective: '1200px' }}>
+        {/* Animated 3D Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {mounted && ctaDecoPositions.map((deco, i) => (
+            <div
+              key={`cta-deco-${i}`}
+              className="absolute animate-float"
+              style={{
+                width: `${deco.width}px`,
+                height: `${deco.height}px`,
+                left: `${deco.left}%`,
+                top: `${deco.top}%`,
+                animationDelay: `${deco.delay}s`,
+                animationDuration: `${deco.duration}s`,
+              }}
+            >
+              <div className={`w-full h-full ${deco.isCircle ? 'rounded-full' : 'rounded-lg'} bg-gradient-to-br from-blue-400/10 to-purple-400/10 blur-xl`} />
+            </div>
+          ))}
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Card className="p-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 border-none text-white shadow-2xl" style={{ transformStyle: 'preserve-3d' }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Ready to Transform Your Income?
             </h2>
@@ -281,7 +391,7 @@ export default function Home() {
             <Link href="/blogs">
               <Button
                 size="lg"
-                className="bg-white text-purple-600 hover:bg-white/90 font-semibold px-8 py-6 text-lg rounded-full"
+                className="bg-white text-purple-600 hover:bg-white/90 font-semibold px-8 py-6 text-lg rounded-full shadow-xl"
                 data-testid="button-cta-explore"
               >
                 Explore All Blogs
@@ -306,8 +416,32 @@ export default function Home() {
             transform: translateY(-30px) translateX(5px);
           }
         }
+        
+        @keyframes rotate3d {
+          0% {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateZ(0px);
+          }
+          25% {
+            transform: rotateX(90deg) rotateY(180deg) rotateZ(45deg) translateZ(50px);
+          }
+          50% {
+            transform: rotateX(180deg) rotateY(360deg) rotateZ(90deg) translateZ(0px);
+          }
+          75% {
+            transform: rotateX(270deg) rotateY(180deg) rotateZ(135deg) translateZ(50px);
+          }
+          100% {
+            transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg) translateZ(0px);
+          }
+        }
+        
         .animate-float {
           animation: float linear infinite;
+        }
+        
+        .animate-3d-rotate {
+          animation: rotate3d linear infinite;
+          transform-style: preserve-3d;
         }
       `}</style>
     </div>

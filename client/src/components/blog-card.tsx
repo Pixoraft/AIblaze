@@ -8,14 +8,23 @@ interface BlogCardProps {
   blog: Blog;
 }
 
+const getImageUrl = (imagePath: string): string => {
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  return imagePath;
+};
+
 export function BlogCard({ blog }: BlogCardProps) {
+  const imageUrl = getImageUrl(blog.imagePath);
+  
   return (
     <Link href={`/blog/${blog.slug}`} data-testid={`card-blog-${blog.slug}`}>
       <Card className="overflow-hidden hover-elevate transition-all duration-300 hover:shadow-lg group">
           {/* Image */}
           <div className="relative overflow-hidden aspect-video">
             <img
-              src={blog.imagePath}
+              src={imageUrl}
               alt={blog.title}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               data-testid={`img-blog-${blog.slug}`}

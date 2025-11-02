@@ -105,6 +105,9 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {currentYear} AIBlaze. All rights reserved.
           </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            Owned by <span className="font-semibold text-foreground">Pixocraft</span>
+          </p>
         </div>
       </div>
     </footer>
