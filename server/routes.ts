@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema } from "@shared/schema";
+import { insertContactMessageSchema, insertCommentSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Blog routes
@@ -55,6 +55,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Invalid form data", details: error });
       }
       res.status(500).json({ error: "Failed to submit message" });
+    }
+  });
+
+  // Comment routes
+  app.get("/api/comments/:blogId", async (req, res) => {
+    try {
+      const comments = await storage.getCommentsByBlogId(req.params.blogId);
+      res.json(comments);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch comments" });
+    }
+  });
+
+  app.post("/api/comments", async (req, res) => {
+    try {
+      const validatedData = insertCommentSchema.parse(req.body);
+      const comment = await storage.createComment(validatedData);
+      res.status(201).json({ success: true, comment });
+    } catch (error) {
+      if (error instanceof Error && error.name === "ZodError") {
+        return res.status(400).json({ error: "Invalid comment data", details: error });
+      }
+      res.status(500).json({ error: "Failed to submit comment" });
     }
   });
 

@@ -1,4 +1,4 @@
-import { type Blog, type InsertBlog, type ContactMessage, type InsertContactMessage } from "@shared/schema";
+import { type Blog, type InsertBlog, type ContactMessage, type InsertContactMessage, type Comment, type InsertComment } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
@@ -13,15 +13,21 @@ export interface IStorage {
   
   // Contact operations
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
+  
+  // Comment operations
+  getCommentsByBlogId(blogId: string): Promise<Comment[]>;
+  createComment(comment: InsertComment): Promise<Comment>;
 }
 
 export class MemStorage implements IStorage {
   private blogs: Map<string, Blog>;
   private contactMessages: Map<string, ContactMessage>;
+  private comments: Map<string, Comment>;
 
   constructor() {
     this.blogs = new Map();
     this.contactMessages = new Map();
+    this.comments = new Map();
     this.loadBlogsFromFiles();
   }
 
@@ -109,6 +115,23 @@ export class MemStorage implements IStorage {
     };
     this.contactMessages.set(id, message);
     return message;
+  }
+
+  async getCommentsByBlogId(blogId: string): Promise<Comment[]> {
+    return Array.from(this.comments.values())
+      .filter((comment) => comment.blogId === blogId)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  async createComment(insertComment: InsertComment): Promise<Comment> {
+    const id = randomUUID();
+    const comment: Comment = {
+      ...insertComment,
+      id,
+      createdAt: new Date().toISOString(),
+    };
+    this.comments.set(id, comment);
+    return comment;
   }
 }
 

@@ -1,14 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useRoute } from "wouter";
-import { Calendar, Clock, ArrowLeft, Twitter, Linkedin, Link as LinkIcon, Check } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Twitter, Linkedin, Link as LinkIcon, Check, MessageCircle, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BlogCard } from "@/components/blog-card";
 import { Link } from "wouter";
-import type { Blog } from "@shared/schema";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { Blog, Comment, InsertComment } from "@shared/schema";
+import { insertCommentSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
+import { queryClient, apiRequest } from "@/lib/queryClient";
 
 const getImageUrl = (imagePath: string): string => {
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
@@ -31,6 +38,57 @@ export default function BlogDetail() {
     queryKey: [`/api/blogs/related/${blog?.id}`],
     enabled: !!blog?.id,
   });
+
+  const { data: comments, isLoading: commentsLoading } = useQuery<Comment[]>({
+    queryKey: [`/api/comments`, blog?.id],
+    enabled: !!blog?.id,
+  });
+
+  const form = useForm<InsertComment>({
+    resolver: zodResolver(insertCommentSchema),
+    defaultValues: {
+      blogId: blog?.id || "",
+      name: "",
+      email: "",
+      comment: "",
+    },
+  });
+
+  useEffect(() => {
+    if (blog?.id) {
+      form.setValue("blogId", blog.id);
+    }
+  }, [blog?.id, form]);
+
+  const createCommentMutation = useMutation({
+    mutationFn: async (data: InsertComment) => {
+      return await apiRequest("POST", "/api/comments", data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [`/api/comments`, blog?.id] });
+      form.reset({
+        blogId: blog?.id || "",
+        name: "",
+        email: "",
+        comment: "",
+      });
+      toast({
+        title: "Success!",
+        description: "Your comment has been posted.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to post comment. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: InsertComment) => {
+    createCommentMutation.mutate(data);
+  };
 
   useEffect(() => {
     if (blog) {
@@ -206,6 +264,134 @@ export default function BlogDetail() {
           data-testid="content-blog"
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
+
+        {/* Comments Section */}
+        <div className="mt-16 mb-12" data-testid="section-comments">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <MessageCircle className="h-8 w-8" />
+            Comments ({comments?.length || 0})
+          </h2>
+
+          {/* Comment Form */}
+          <Card className="p-6 mb-8">
+            <h3 className="text-xl font-semibold mb-4">Leave a Comment</h3>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your name"
+                            {...field}
+                            data-testid="input-comment-name"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="your@email.com"
+                            {...field}
+                            data-testid="input-comment-email"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="comment"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Comment</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Share your thoughts..."
+                          className="min-h-32"
+                          {...field}
+                          data-testid="input-comment-text"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  disabled={createCommentMutation.isPending}
+                  data-testid="button-submit-comment"
+                >
+                  {createCommentMutation.isPending ? "Posting..." : "Post Comment"}
+                </Button>
+              </form>
+            </Form>
+          </Card>
+
+          {/* Comments List */}
+          {commentsLoading ? (
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <Card key={i} className="p-6 animate-pulse">
+                  <div className="h-4 bg-muted rounded w-1/4 mb-3" />
+                  <div className="h-3 bg-muted rounded w-full mb-2" />
+                  <div className="h-3 bg-muted rounded w-3/4" />
+                </Card>
+              ))}
+            </div>
+          ) : comments && comments.length > 0 ? (
+            <div className="space-y-4">
+              {comments.map((comment) => (
+                <Card key={comment.id} className="p-6" data-testid={`card-comment-${comment.id}`}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center flex-shrink-0">
+                      <User className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="font-semibold" data-testid={`text-comment-name-${comment.id}`}>
+                          {comment.name}
+                        </h4>
+                        <span className="text-sm text-muted-foreground" data-testid={`text-comment-date-${comment.id}`}>
+                          {new Date(comment.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed" data-testid={`text-comment-text-${comment.id}`}>
+                        {comment.comment}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <Card className="p-8 text-center">
+              <MessageCircle className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+              <p className="text-muted-foreground">
+                No comments yet. Be the first to share your thoughts!
+              </p>
+            </Card>
+          )}
+        </div>
 
         {/* Related Blogs */}
         {relatedBlogs && relatedBlogs.length > 0 && (

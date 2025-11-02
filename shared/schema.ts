@@ -45,3 +45,25 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).om
 
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
+
+export const comments = pgTable("comments", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  blogId: varchar("blog_id").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  comment: text("comment").notNull(),
+  createdAt: text("created_at").notNull(),
+});
+
+export const insertCommentSchema = createInsertSchema(comments).omit({
+  id: true,
+  createdAt: true,
+}).extend({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  comment: z.string().min(5, "Comment must be at least 5 characters"),
+  blogId: z.string().min(1, "Blog ID is required"),
+});
+
+export type InsertComment = z.infer<typeof insertCommentSchema>;
+export type Comment = typeof comments.$inferSelect;
