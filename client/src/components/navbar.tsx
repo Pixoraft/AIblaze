@@ -12,6 +12,8 @@ export function Navbar() {
   const [location, setLocation] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isDesktopSearchOpen, setIsDesktopSearchOpen] = useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -36,6 +38,8 @@ export function Navbar() {
     if (searchQuery.trim()) {
       setLocation(`/blogs?search=${encodeURIComponent(searchQuery)}`);
       setSearchQuery("");
+      setIsMobileSearchOpen(false);
+      setIsDesktopSearchOpen(false);
     }
   };
 
@@ -64,21 +68,8 @@ export function Navbar() {
             data-testid="link-home-logo"
           >
             <Flame className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500" />
-            <span className="hidden xs:inline">AIBlaze</span>
+            <span>AIBlaze</span>
           </Link>
-
-          {/* Mobile Search Bar (visible only on mobile) */}
-          <form onSubmit={handleSearch} className="relative flex-1 md:hidden max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 h-9 w-full"
-              data-testid="input-search-mobile"
-            />
-          </form>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
@@ -128,6 +119,17 @@ export function Navbar() {
               </div>
             ))}
             
+            {/* Desktop Search Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsDesktopSearchOpen(!isDesktopSearchOpen)}
+              data-testid="button-search-toggle"
+              className="rounded-full"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
+
             {/* Theme Toggle (Desktop) */}
             <Button
               variant="ghost"
@@ -146,26 +148,28 @@ export function Navbar() {
 
           {/* Mobile Controls */}
           <div className="flex md:hidden items-center gap-2">
-            {/* Theme Toggle (Mobile) */}
+            {/* Mobile Search Button */}
             <Button
               variant="ghost"
               size="icon"
-              onClick={toggleTheme}
-              data-testid="button-theme-toggle-mobile"
+              onClick={() => {
+                setIsMobileSearchOpen(!isMobileSearchOpen);
+                setIsMobileMenuOpen(false);
+              }}
+              data-testid="button-search-toggle-mobile"
               className="rounded-full"
             >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
+              <Search className="h-5 w-5" />
             </Button>
 
             {/* Mobile Menu Toggle */}
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => {
+                setIsMobileMenuOpen(!isMobileMenuOpen);
+                setIsMobileSearchOpen(false);
+              }}
               data-testid="button-mobile-menu-toggle"
             >
               {isMobileMenuOpen ? (
@@ -176,6 +180,42 @@ export function Navbar() {
             </Button>
           </div>
         </div>
+
+        {/* Desktop Search Bar (appears below navbar when opened) */}
+        {isDesktopSearchOpen && (
+          <div className="hidden md:block mt-4 pb-2">
+            <form onSubmit={handleSearch} className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search blogs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 h-10 w-full"
+                data-testid="input-search-desktop"
+                autoFocus
+              />
+            </form>
+          </div>
+        )}
+
+        {/* Mobile Search Bar (appears below navbar when opened) */}
+        {isMobileSearchOpen && (
+          <div className="md:hidden mt-4 pb-2">
+            <form onSubmit={handleSearch} className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search blogs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 h-10 w-full"
+                data-testid="input-search-mobile"
+                autoFocus
+              />
+            </form>
+          </div>
+        )}
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
