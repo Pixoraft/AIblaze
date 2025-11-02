@@ -133,9 +133,9 @@ export default function BlogDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen py-12 px-6">
+      <div className="min-h-screen py-8 sm:py-12 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <Card className="h-96 animate-pulse bg-muted" />
+          <Card className="h-80 sm:h-96 animate-pulse bg-muted" />
         </div>
       </div>
     );
@@ -143,10 +143,10 @@ export default function BlogDetail() {
 
   if (!blog) {
     return (
-      <div className="min-h-screen py-24 px-6">
+      <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl font-bold mb-4">Blog not found</h1>
-          <p className="text-muted-foreground mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4">Blog not found</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 px-4">
             The blog post you're looking for doesn't exist.
           </p>
           <Link href="/blogs">
@@ -162,9 +162,9 @@ export default function BlogDetail() {
   return (
     <article className="min-h-screen" data-testid="article-blog-detail">
       {/* Back Button */}
-      <div className="max-w-4xl mx-auto px-6 pt-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
         <Link href="/blogs">
-          <Button variant="ghost" className="mb-6" data-testid="button-back" asChild>
+          <Button variant="ghost" className="mb-4 sm:mb-6" data-testid="button-back" asChild>
             <span>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Blogs

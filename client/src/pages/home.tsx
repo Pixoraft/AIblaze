@@ -106,7 +106,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Slider Section */}
       <section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden"
         data-testid="section-hero"
       >
         {slides.map((slide, index) => (
@@ -170,24 +170,24 @@ export default function Home() {
 
             {/* Content */}
             <div
-              className={`relative z-10 max-w-5xl mx-auto px-6 text-center h-full flex flex-col items-center justify-center transition-all duration-1000 ${
+              className={`relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center h-full flex flex-col items-center justify-center transition-all duration-1000 ${
                 mounted && index === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white mb-6 border border-white/20">
-                <Sparkles className="h-4 w-4" />
-                <span className="text-sm font-medium">AI-Powered Income Strategies</span>
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-white mb-4 sm:mb-6 border border-white/20">
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm font-medium">AI-Powered Income Strategies</span>
               </div>
 
               <h1
-                className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-4"
                 data-testid="text-hero-headline"
               >
                 {slide.title}
               </h1>
 
               <p
-                className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4"
                 data-testid="text-hero-subtext"
               >
                 {slide.subtitle}
@@ -196,7 +196,7 @@ export default function Home() {
               <Link href={slide.ctaLink}>
                 <Button
                   size="lg"
-                  className="bg-white text-purple-600 hover:bg-white/90 font-semibold px-8 py-6 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  className="bg-white text-purple-600 hover:bg-white/90 font-semibold px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   data-testid="button-read-blogs"
                 >
                   {slide.ctaText}
@@ -211,33 +211,33 @@ export default function Home() {
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white rounded-full p-3 transition-all"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white rounded-full p-2 sm:p-3 transition-all"
               data-testid="button-prev-slide"
               aria-label="Previous slide"
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white rounded-full p-3 transition-all"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white rounded-full p-2 sm:p-3 transition-all"
               data-testid="button-next-slide"
               aria-label="Next slide"
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
           </>
         )}
 
         {/* Dots Indicator */}
         {slides.length > 1 && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 sm:gap-2">
             {slides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
                   index === currentSlide
-                    ? 'bg-white w-8'
+                    ? 'bg-white w-6 sm:w-8'
                     : 'bg-white/50 hover:bg-white/75'
                 }`}
                 data-testid={`button-slide-${index}`}
@@ -249,25 +249,25 @@ export default function Home() {
       </section>
 
       {/* Featured Blogs */}
-      <section className="py-24 px-6" data-testid="section-featured-blogs">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6" data-testid="section-featured-blogs">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent px-4">
               Featured Articles
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Discover the latest AI tools and strategies to boost your income
             </p>
           </div>
 
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {[...Array(3)].map((_, i) => (
-                <Card key={i} className="h-96 animate-pulse bg-muted" />
+                <Card key={i} className="h-80 sm:h-96 animate-pulse bg-muted" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {featuredBlogs?.slice(0, 3).map((blog) => (
                 <BlogCard key={blog.id} blog={blog} />
               ))}
@@ -278,7 +278,7 @@ export default function Home() {
 
       {/* Why AIBlaze Section */}
       <section
-        className="relative py-24 px-6 bg-gradient-to-b from-transparent via-primary/5 to-transparent overflow-hidden"
+        className="relative py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 bg-gradient-to-b from-transparent via-primary/5 to-transparent overflow-hidden"
         data-testid="section-why-aiblaze"
         style={{ perspective: '1000px' }}
       >
@@ -303,53 +303,53 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 px-4">
               Why AIBlaze?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Your journey to financial freedom starts here
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {/* Learn */}
-            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-                <GraduationCap className="h-8 w-8 text-white" />
+            <Card className="p-6 sm:p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                <GraduationCap className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold mb-4" data-testid="text-why-learn-title">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4" data-testid="text-why-learn-title">
                 Learn
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Master AI tools and automation techniques that top earners use
                 to maximize their productivity and income potential.
               </p>
             </Card>
 
             {/* Earn */}
-            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
-                <DollarSign className="h-8 w-8 text-white" />
+            <Card className="p-6 sm:p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
+                <DollarSign className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold mb-4" data-testid="text-why-earn-title">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4" data-testid="text-why-earn-title">
                 Earn
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Generate real income streams using proven AI strategies,
                 whether you're a student, creator, or professional.
               </p>
             </Card>
 
             {/* Grow */}
-            <Card className="p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center shadow-lg">
-                <TrendingUp className="h-8 w-8 text-white" />
+            <Card className="p-6 sm:p-8 text-center hover-elevate transition-all duration-300 hover:shadow-lg relative overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center shadow-lg">
+                <TrendingUp className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold mb-4" data-testid="text-why-grow-title">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4" data-testid="text-why-grow-title">
                 Grow
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 Scale your digital presence and build sustainable passive
                 income systems that work for you 24/7.
               </p>
@@ -359,7 +359,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 px-6 overflow-hidden" data-testid="section-cta" style={{ perspective: '1200px' }}>
+      <section className="relative py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden" data-testid="section-cta" style={{ perspective: '1200px' }}>
         {/* Animated 3D Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           {mounted && ctaDecoPositions.map((deco, i) => (
@@ -381,17 +381,17 @@ export default function Home() {
         </div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <Card className="p-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 border-none text-white shadow-2xl" style={{ transformStyle: 'preserve-3d' }}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <Card className="p-8 sm:p-10 md:p-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 border-none text-white shadow-2xl" style={{ transformStyle: 'preserve-3d' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
               Ready to Transform Your Income?
             </h2>
-            <p className="text-xl mb-8 text-white/90">
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white/90">
               Join thousands learning to earn with AI
             </p>
             <Link href="/blogs">
               <Button
                 size="lg"
-                className="bg-white text-purple-600 hover:bg-white/90 font-semibold px-8 py-6 text-lg rounded-full shadow-xl"
+                className="bg-white text-purple-600 hover:bg-white/90 font-semibold px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-full shadow-xl"
                 data-testid="button-cta-explore"
               >
                 Explore All Blogs

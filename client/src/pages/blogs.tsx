@@ -60,50 +60,51 @@ export default function Blogs() {
   };
 
   return (
-    <div className="min-h-screen py-24 px-6">
+    <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12" data-testid="section-blogs-header">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12" data-testid="section-blogs-header">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent px-4">
             AI + Money Insights
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             Explore our comprehensive guides on leveraging AI for financial
             growth, automation, and digital entrepreneurship
           </p>
         </div>
 
         {/* Search and Filters */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-10 md:mb-12">
           {/* Search Bar */}
-          <div className="relative max-w-2xl mx-auto mb-8">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <div className="relative max-w-2xl mx-auto mb-6 sm:mb-8">
+            <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search blogs by title, content, or category..."
+              placeholder="Search blogs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 pr-12 py-6 text-lg"
+              className="pl-10 sm:pl-12 pr-10 sm:pr-12 py-4 sm:py-6 text-base sm:text-lg"
               data-testid="input-search-blogs"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 data-testid="button-clear-search"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             )}
           </div>
 
           {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             <Button
               variant={selectedCategory === null ? "default" : "outline"}
               onClick={() => setSelectedCategory(null)}
               data-testid="button-category-all"
-              className="rounded-full"
+              className="rounded-full text-sm sm:text-base"
+              size="sm"
             >
               All Categories
             </Button>
@@ -113,7 +114,8 @@ export default function Blogs() {
                 variant={selectedCategory === category ? "default" : "outline"}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`button-category-${category.toLowerCase().replace(/\s+/g, '-')}`}
-                className="rounded-full"
+                className="rounded-full text-sm sm:text-base"
+                size="sm"
               >
                 {category}
               </Button>
@@ -122,18 +124,18 @@ export default function Blogs() {
 
           {/* Active Filters Display */}
           {(searchQuery || selectedCategory) && (
-            <div className="flex flex-wrap justify-center items-center gap-3 mt-6">
-              <span className="text-sm text-muted-foreground">Active filters:</span>
+            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mt-4 sm:mt-6">
+              <span className="text-xs sm:text-sm text-muted-foreground">Active filters:</span>
               {searchQuery && (
-                <Badge variant="secondary" className="gap-2">
-                  Search: "{searchQuery}"
+                <Badge variant="secondary" className="gap-1 sm:gap-2 text-xs sm:text-sm">
+                  Search: "{searchQuery.length > 20 ? searchQuery.substring(0, 20) + '...' : searchQuery}"
                   <button onClick={() => setSearchQuery("")} className="hover:text-destructive">
                     <X className="h-3 w-3" />
                   </button>
                 </Badge>
               )}
               {selectedCategory && (
-                <Badge variant="secondary" className="gap-2">
+                <Badge variant="secondary" className="gap-1 sm:gap-2 text-xs sm:text-sm">
                   Category: {selectedCategory}
                   <button onClick={() => setSelectedCategory(null)} className="hover:text-destructive">
                     <X className="h-3 w-3" />
@@ -145,6 +147,7 @@ export default function Blogs() {
                 size="sm"
                 onClick={clearFilters}
                 data-testid="button-clear-all-filters"
+                className="text-xs sm:text-sm"
               >
                 Clear all
               </Button>
@@ -154,8 +157,8 @@ export default function Blogs() {
 
         {/* Results Count */}
         {!isLoading && (
-          <div className="text-center mb-8">
-            <p className="text-muted-foreground" data-testid="text-results-count">
+          <div className="text-center mb-6 sm:mb-8">
+            <p className="text-sm sm:text-base text-muted-foreground" data-testid="text-results-count">
               Showing {filteredBlogs.length} of {blogs?.length || 0} blogs
             </p>
           </div>
@@ -163,17 +166,17 @@ export default function Blogs() {
 
         {/* Blog Grid */}
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[...Array(6)].map((_, i) => (
               <Card
                 key={i}
-                className="h-96 animate-pulse bg-muted"
+                className="h-80 sm:h-96 animate-pulse bg-muted"
                 data-testid={`skeleton-blog-${i}`}
               />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {filteredBlogs.map((blog) => (
               <BlogCard key={blog.id} blog={blog} />
             ))}
@@ -182,8 +185,8 @@ export default function Blogs() {
 
         {/* Empty State */}
         {!isLoading && filteredBlogs.length === 0 && (
-          <div className="text-center py-24" data-testid="empty-state-blogs">
-            <p className="text-2xl text-muted-foreground mb-4">
+          <div className="text-center py-16 sm:py-20 md:py-24 px-4" data-testid="empty-state-blogs">
+            <p className="text-xl sm:text-2xl text-muted-foreground mb-4">
               No blogs found matching your criteria
             </p>
             {(searchQuery || selectedCategory) && (

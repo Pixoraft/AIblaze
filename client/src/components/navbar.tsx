@@ -55,20 +55,33 @@ export function Navbar() {
       }`}
       data-testid="navbar"
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <Link 
             href="/" 
-            className="flex items-center gap-2 text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent hover-elevate transition-transform duration-200" 
+            className="flex items-center gap-2 text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent hover-elevate transition-transform duration-200 flex-shrink-0" 
             data-testid="link-home-logo"
           >
-            <Flame className="h-6 w-6 text-orange-500" />
-            <span>AIBlaze</span>
+            <Flame className="h-5 w-5 sm:h-6 sm:w-6 text-orange-500" />
+            <span className="hidden xs:inline">AIBlaze</span>
           </Link>
 
+          {/* Mobile Search Bar (visible only on mobile) */}
+          <form onSubmit={handleSearch} className="relative flex-1 md:hidden max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 h-9 w-full"
+              data-testid="input-search-mobile"
+            />
+          </form>
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
             {navLinks.map((link) => (
               <div
                 key={link.href}
@@ -115,22 +128,7 @@ export function Navbar() {
               </div>
             ))}
             
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search blogs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-48 h-9"
-                data-testid="input-search"
-              />
-            </form>
-          </div>
-
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center gap-4">
+            {/* Theme Toggle (Desktop) */}
             <Button
               variant="ghost"
               size="icon"
@@ -144,12 +142,29 @@ export function Navbar() {
                 <Sun className="h-5 w-5" />
               )}
             </Button>
+          </div>
+
+          {/* Mobile Controls */}
+          <div className="flex md:hidden items-center gap-2">
+            {/* Theme Toggle (Mobile) */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              data-testid="button-theme-toggle-mobile"
+              className="rounded-full"
+            >
+              {theme === "light" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
+            </Button>
 
             {/* Mobile Menu Toggle */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="button-mobile-menu-toggle"
             >
@@ -165,22 +180,9 @@ export function Navbar() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div
-            className="md:hidden mt-4 pb-4 flex flex-col gap-4"
+            className="md:hidden mt-4 pb-4 flex flex-col gap-3"
             data-testid="mobile-menu"
           >
-            {/* Mobile Search */}
-            <form onSubmit={handleSearch} className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search blogs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-                data-testid="input-search-mobile"
-              />
-            </form>
-            
             {navLinks.map((link) => (
               <Link 
                 key={link.href} 
