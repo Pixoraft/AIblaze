@@ -9,7 +9,7 @@ import { insertContactMessageSchema, type InsertContactMessage } from "@shared/s
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Mail, CheckCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Contact() {
@@ -84,47 +84,24 @@ export default function Contact() {
               </p>
             </div>
 
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="h-6 w-6 text-primary" />
+            <a
+              href="mailto:vivekrvt84@gmail.com"
+              data-testid="link-email-contact"
+            >
+              <Card className="p-6 hover-elevate transition-all cursor-pointer">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Email</h3>
+                    <p className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      vivekrvt84@gmail.com
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">
-                    hello@aiblaze.com
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Location</h3>
-                  <p className="text-sm text-muted-foreground">
-                    San Francisco, CA
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-sm text-muted-foreground">
-                    +1 (555) 123-4567
-                  </p>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </a>
           </div>
 
           {/* Contact Form */}

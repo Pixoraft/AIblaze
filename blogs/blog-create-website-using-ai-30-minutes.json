@@ -1,0 +1,13 @@
+{
+  "id": "blog-007",
+  "slug": "create-website-using-ai-30-minutes",
+  "title": "How I Created a Full Website Using AI in 30 Minutes",
+  "excerpt": "A step-by-step breakdown of building a professional website from scratch using AI tools. No coding required.",
+  "content": "<h2>The 30-Minute Website Challenge</h2><p>I challenged myself to build a complete, professional website in just 30 minutes using only AI tools. Here's exactly how I did it.</p><h2>Tools Used</h2><p>ChatGPT for content, Midjourney for images, and v0.dev for design and code generation. Each tool played a crucial role.</p><h2>Step 1: Planning (5 minutes)</h2><p>Used ChatGPT to create a site structure, content outline, and color scheme. Clear planning made execution smooth.</p><h2>Step 2: Content Creation (10 minutes)</h2><p>ChatGPT generated all copy including headlines, body text, and calls-to-action. Minor edits for brand voice.</p><h2>Step 3: Design & Development (15 minutes)</h2><p>v0.dev turned my requirements into a fully functional, responsive website. Midjourney created custom images.</p><h2>The Results</h2><p>A professional website that would have taken days traditionally was completed in 30 minutes. The future of web development is here.</p>",
+  "author": "AIBlaze Team",
+  "category": "Web Development",
+  "imagePath": "/generated_images/Website_creation_using_AI_b4c53017.png",
+  "readTime": 6,
+  "featured": 0,
+  "publishedAt": "2025-02-15"
+}
