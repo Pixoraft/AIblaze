@@ -106,7 +106,16 @@ export function Footer() {
             © {currentYear} AIBlaze. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            Owned by <span className="font-semibold text-foreground">Pixocraft</span>
+            Owned by{" "}
+            <a
+              href="https://www.google.com/search?q=Pixocraft"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
+              data-testid="link-pixocraft"
+            >
+              Pixocraft
+            </a>
           </p>
         </div>
       </div>
