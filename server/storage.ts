@@ -1,7 +1,6 @@
 import { type Blog, type InsertBlog, type ContactMessage, type InsertContactMessage, type Comment, type InsertComment } from "@shared/schema";
 import { randomUUID } from "crypto";
-import { readdirSync, readFileSync } from "fs";
-import { join } from "path";
+import { blogData } from "./blog-data";
 
 export interface IStorage {
   // Blog operations
@@ -28,37 +27,17 @@ export class MemStorage implements IStorage {
     this.blogs = new Map();
     this.contactMessages = new Map();
     this.comments = new Map();
-    this.loadBlogsFromFiles();
+    this.loadBlogsFromStaticData();
   }
 
-  private loadBlogsFromFiles() {
+  private loadBlogsFromStaticData() {
     try {
-      const blogsDir = join(process.cwd(), 'blogs');
-      const files = readdirSync(blogsDir);
-      
-      files.forEach((file) => {
-        if (file.endsWith('.json')) {
-          const filePath = join(blogsDir, file);
-          const fileContent = readFileSync(filePath, 'utf-8');
-          const blogData = JSON.parse(fileContent);
-          const blog: Blog = {
-            id: blogData.id || randomUUID(),
-            slug: blogData.slug,
-            title: blogData.title,
-            excerpt: blogData.excerpt,
-            content: blogData.content,
-            author: blogData.author || "AIBlaze Team",
-            category: blogData.category,
-            imagePath: blogData.imagePath,
-            readTime: blogData.readTime || 5,
-            featured: blogData.featured || 0,
-            publishedAt: blogData.publishedAt,
-          };
-          this.blogs.set(blog.id, blog);
-        }
+      blogData.forEach((blog) => {
+        this.blogs.set(blog.id, blog);
       });
+      console.log(`Loaded ${this.blogs.size} blogs from static data`);
     } catch (error) {
-      console.error('Error loading blogs from files:', error);
+      console.error('Error loading blogs from static data:', error);
     }
   }
 
