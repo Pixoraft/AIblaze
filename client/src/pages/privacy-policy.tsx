@@ -13,8 +13,8 @@ export default function PrivacyPolicy() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-blue-500" />
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-blue-500 dark:text-blue-400" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
               Privacy Policy
             </h1>
           </div>
@@ -28,7 +28,7 @@ export default function PrivacyPolicy() {
           <div className="prose prose-sm sm:prose-base max-w-none dark:prose-invert">
             <div className="space-y-8 text-foreground">
               <section>
-                <h2 className="text-2xl font-bold mb-4">Introduction</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Introduction</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   Welcome to <strong>AIBlaze</strong> — your trusted source for AI insights, tools, and innovation.
                   We respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website.
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Information We Collect</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Information We Collect</h2>
                 <p className="leading-relaxed text-muted-foreground mb-3">
                   We may collect the following information:
                 </p>
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">How We Use Your Information</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">How We Use Your Information</h2>
                 <p className="leading-relaxed text-muted-foreground mb-3">
                   We use your data to:
                 </p>
@@ -61,7 +61,7 @@ export default function PrivacyPolicy() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Cookies</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Cookies</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   AIBlaze uses cookies to personalize content and analyze traffic.
                   You can disable cookies in your browser settings, but some site features may not work properly.
@@ -69,21 +69,21 @@ export default function PrivacyPolicy() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Data Protection</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Data Protection</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   Your data is stored securely. We do not sell or share your personal information with third parties, except as required by law or for analytics (e.g., Google Analytics).
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">External Links</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">External Links</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   Our website may contain links to other sites. We are not responsible for their privacy policies or content.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Your Rights (GDPR Compliance)</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Your Rights (GDPR Compliance)</h2>
                 <p className="leading-relaxed text-muted-foreground mb-3">
                   If you are from the EU or other regions with data protection laws, you have rights to:
                 </p>
@@ -98,14 +98,14 @@ export default function PrivacyPolicy() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Updates to this Policy</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Updates to this Policy</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   We may update this Privacy Policy from time to time. Please review it periodically for changes.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Contact Us</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   For any privacy-related questions:
                 </p>

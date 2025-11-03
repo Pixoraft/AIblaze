@@ -13,8 +13,8 @@ export default function TermsAndConditions() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-purple-500" />
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <FileText className="h-8 w-8 sm:h-10 sm:w-10 text-purple-500 dark:text-purple-400" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
               Terms & Conditions
             </h1>
           </div>
@@ -28,14 +28,14 @@ export default function TermsAndConditions() {
           <div className="prose prose-sm sm:prose-base max-w-none dark:prose-invert">
             <div className="space-y-8 text-foreground">
               <section>
-                <h2 className="text-2xl font-bold mb-4">Acceptance of Terms</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Acceptance of Terms</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   By using <strong>AIBlaze</strong>, you agree to these Terms and Conditions. If you disagree, please discontinue use of our site.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Use of Content</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Use of Content</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   All content on AIBlaze (text, images, videos, tools) is owned or licensed by us.
                   You may not copy, redistribute, or modify any content without written permission.
@@ -43,7 +43,7 @@ export default function TermsAndConditions() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">User Responsibilities</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">User Responsibilities</h2>
                 <p className="leading-relaxed text-muted-foreground mb-3">
                   You agree not to:
                 </p>
@@ -55,7 +55,7 @@ export default function TermsAndConditions() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Disclaimer</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Disclaimer</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   AIBlaze provides content "as is."
                   We do not guarantee the accuracy or completeness of information and are not liable for any losses resulting from its use.
@@ -63,7 +63,7 @@ export default function TermsAndConditions() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Third-Party Links</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Third-Party Links</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   AIBlaze may include links to other websites.
                   We are not responsible for their content, policies, or accuracy.
@@ -71,7 +71,7 @@ export default function TermsAndConditions() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Limitation of Liability</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Limitation of Liability</h2>
                 <p className="leading-relaxed text-muted-foreground mb-3">
                   AIBlaze and its creators will not be held responsible for:
                 </p>
@@ -82,21 +82,21 @@ export default function TermsAndConditions() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Termination</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Termination</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   We reserve the right to block or remove users who violate these terms without prior notice.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Governing Law</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Governing Law</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   These terms shall be governed by and interpreted in accordance with Indian laws.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Contact Information</h2>
                 <p className="leading-relaxed text-muted-foreground">
                   For questions about these Terms, contact us at:
                 </p>

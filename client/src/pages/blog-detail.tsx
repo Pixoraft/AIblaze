@@ -263,7 +263,7 @@ export default function BlogDetail() {
 
         {/* Blog Content */}
         <div
-          className="prose prose-lg max-w-none mb-16"
+          className="prose prose-lg max-w-none mb-16 dark:prose-invert"
           data-testid="content-blog"
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />

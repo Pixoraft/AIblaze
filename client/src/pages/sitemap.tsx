@@ -24,8 +24,8 @@ export default function Sitemap() {
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Map className="h-8 w-8 sm:h-10 sm:w-10 text-blue-500" />
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Map className="h-8 w-8 sm:h-10 sm:w-10 text-blue-500 dark:text-blue-400" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
               Sitemap
             </h1>
           </div>
