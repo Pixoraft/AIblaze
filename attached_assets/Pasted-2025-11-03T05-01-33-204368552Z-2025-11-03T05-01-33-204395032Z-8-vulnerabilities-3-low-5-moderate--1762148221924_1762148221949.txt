@@ -1,0 +1,50 @@
+2025-11-03T05:01:33.204368552Z 
+2025-11-03T05:01:33.204395032Z 8 vulnerabilities (3 low, 5 moderate)
+2025-11-03T05:01:33.204399352Z 
+2025-11-03T05:01:33.204402883Z To address issues that do not require attention, run:
+2025-11-03T05:01:33.204405783Z   npm audit fix
+2025-11-03T05:01:33.204408373Z 
+2025-11-03T05:01:33.204411103Z To address all issues (including breaking changes), run:
+2025-11-03T05:01:33.204414343Z   npm audit fix --force
+2025-11-03T05:01:33.204416973Z 
+2025-11-03T05:01:33.204419823Z Run `npm audit` for details.
+2025-11-03T05:01:33.309959783Z ==> Running build command 'npm install; npm run build'...
+2025-11-03T05:01:34.444009658Z 
+2025-11-03T05:01:34.444051199Z up to date, audited 479 packages in 1s
+2025-11-03T05:01:34.44407593Z 
+2025-11-03T05:01:34.44408932Z 64 packages are looking for funding
+2025-11-03T05:01:34.444180693Z   run `npm fund` for details
+2025-11-03T05:01:34.467533345Z 
+2025-11-03T05:01:34.467551015Z 8 vulnerabilities (3 low, 5 moderate)
+2025-11-03T05:01:34.467554365Z 
+2025-11-03T05:01:34.467558035Z To address issues that do not require attention, run:
+2025-11-03T05:01:34.467561155Z   npm audit fix
+2025-11-03T05:01:34.467563865Z 
+2025-11-03T05:01:34.467566785Z To address all issues (including breaking changes), run:
+2025-11-03T05:01:34.467570256Z   npm audit fix --force
+2025-11-03T05:01:34.467572946Z 
+2025-11-03T05:01:34.467585536Z Run `npm audit` for details.
+2025-11-03T05:01:34.625347811Z 
+2025-11-03T05:01:34.625367152Z > rest-express@1.0.0 build
+2025-11-03T05:01:34.625370432Z > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-11-03T05:01:34.625374392Z 
+2025-11-03T05:01:35.090728835Z vite v5.4.20 building for production...
+2025-11-03T05:01:35.941392847Z transforming...
+2025-11-03T05:01:36.020448605Z Browserslist: browsers data (caniuse-lite) is 13 months old. Please run:
+2025-11-03T05:01:36.020466145Z   npx update-browserslist-db@latest
+2025-11-03T05:01:36.020471225Z   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-11-03T05:01:37.148153227Z 
+2025-11-03T05:01:37.148185098Z A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+2025-11-03T05:01:40.000476285Z ✓ 1795 modules transformed.
+2025-11-03T05:01:40.339612345Z rendering chunks...
+2025-11-03T05:01:40.348783741Z computing gzip size...
+2025-11-03T05:01:40.370958603Z ../dist/public/index.html                   3.35 kB │ gzip:   1.25 kB
+2025-11-03T05:01:40.371000784Z ../dist/public/assets/index-C_QKzb9u.css  119.47 kB │ gzip:  17.63 kB
+2025-11-03T05:01:40.371165758Z ../dist/public/assets/index-DK8q7b_0.js   494.54 kB │ gzip: 146.96 kB
+2025-11-03T05:01:40.371501817Z ✓ built in 4.48s
+2025-11-03T05:01:40.498950881Z 
+2025-11-03T05:01:40.498973772Z   dist/index.js  30.8kb
+2025-11-03T05:01:40.498977982Z 
+2025-11-03T05:01:40.498981832Z ⚡ Done in 26ms
+2025-11-03T05:01:46.286351242Z ==> Uploading build...
+2025-11-03T05:01:46.537056983Z ==> Your site is live 🎉
