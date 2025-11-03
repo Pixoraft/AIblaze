@@ -217,41 +217,44 @@ export default function BlogDetail() {
           </div>
 
           {/* Share Buttons */}
-          <div className="flex items-center gap-3 mb-8 pb-8 border-b">
-            <span className="text-sm font-medium text-muted-foreground">Share:</span>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 pb-8 border-b">
+            <span className="text-sm font-medium text-muted-foreground w-full sm:w-auto mb-1 sm:mb-0">Share:</span>
             <Button
               variant="outline"
               size="sm"
               onClick={shareOnTwitter}
               data-testid="button-share-twitter"
+              className="flex-shrink-0"
             >
-              <Twitter className="h-4 w-4 mr-2" />
-              Twitter
+              <Twitter className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Twitter</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={shareOnLinkedIn}
               data-testid="button-share-linkedin"
+              className="flex-shrink-0"
             >
-              <Linkedin className="h-4 w-4 mr-2" />
-              LinkedIn
+              <Linkedin className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">LinkedIn</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={copyLink}
               data-testid="button-share-copy"
+              className="flex-shrink-0"
             >
               {copiedLink ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
-                  Copied!
+                  <Check className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Copied!</span>
                 </>
               ) : (
                 <>
-                  <LinkIcon className="h-4 w-4 mr-2" />
-                  Copy Link
+                  <LinkIcon className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Copy Link</span>
                 </>
               )}
             </Button>

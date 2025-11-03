@@ -11,6 +11,10 @@ import Blogs from "@/pages/blogs";
 import BlogDetail from "@/pages/blog-detail";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import PrivacyPolicy from "@/pages/privacy-policy";
+import TermsAndConditions from "@/pages/terms-and-conditions";
+import Disclaimer from "@/pages/disclaimer";
+import Sitemap from "@/pages/sitemap";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
 
@@ -34,6 +38,10 @@ function Router() {
         <Route path="/blog/:slug" component={BlogDetail} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms-and-conditions" component={TermsAndConditions} />
+        <Route path="/disclaimer" component={Disclaimer} />
+        <Route path="/sitemap" component={Sitemap} />
         <Route component={NotFound} />
       </Switch>
     </>

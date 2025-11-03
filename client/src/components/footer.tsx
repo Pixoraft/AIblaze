@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="bg-card border-t border-border mt-24" data-testid="footer">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>
             <h3 className="flex items-center gap-2 text-lg font-semibold mb-4">
@@ -60,6 +60,49 @@ export function Footer() {
                   data-testid="link-footer-contact"
                 >
                   Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link 
+                  href="/privacy-policy"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-footer-privacy"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/terms-and-conditions"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-footer-terms"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/disclaimer"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-footer-disclaimer"
+                >
+                  Disclaimer
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/sitemap"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-footer-sitemap"
+                >
+                  Sitemap
                 </Link>
               </li>
             </ul>
