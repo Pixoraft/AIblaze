@@ -57,7 +57,7 @@ export default function Sitemap() {
 
           <div className="mt-8 pt-6 border-t border-border text-center">
             <p className="text-sm text-muted-foreground">
-              📅 Updated: November 2025
+              Updated: November 2025
             </p>
           </div>
         </Card>
