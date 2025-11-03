@@ -162,6 +162,21 @@ export function Navbar() {
               <Search className="h-5 w-5" />
             </Button>
 
+            {/* Mobile Theme Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              data-testid="button-theme-toggle-mobile"
+              className="rounded-full"
+            >
+              {theme === "light" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
+            </Button>
+
             {/* Mobile Menu Toggle */}
             <Button
               variant="ghost"
