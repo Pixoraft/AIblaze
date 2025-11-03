@@ -60,14 +60,14 @@ export default function Blogs() {
   };
 
   return (
-    <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-12" data-testid="section-blogs-header">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent px-4">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 w-full" data-testid="section-blogs-header">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent break-words">
             AI + Money Insights
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Explore our comprehensive guides on leveraging AI for financial
             growth, automation, and digital entrepreneurship
           </p>
@@ -98,7 +98,7 @@ export default function Blogs() {
           </div>
 
           {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 w-full max-w-4xl mx-auto">
             <Button
               variant={selectedCategory === null ? "default" : "outline"}
               onClick={() => setSelectedCategory(null)}
@@ -114,7 +114,7 @@ export default function Blogs() {
                 variant={selectedCategory === category ? "default" : "outline"}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`button-category-${category.toLowerCase().replace(/\s+/g, '-')}`}
-                className="rounded-full text-sm sm:text-base"
+                className="rounded-full text-sm sm:text-base whitespace-nowrap"
                 size="sm"
               >
                 {category}
