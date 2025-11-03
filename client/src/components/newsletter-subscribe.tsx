@@ -24,30 +24,10 @@ export function NewsletterSubscribe({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !email.includes("@")) {
-      toast({
-        title: "Invalid email",
-        description: "Please enter a valid email address",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSuccess(true);
-      setIsSubmitting(false);
-      setEmail("");
-      
-      toast({
-        title: "Successfully subscribed!",
-        description: "Check your inbox for a confirmation email.",
-      });
-
-      setTimeout(() => setIsSuccess(false), 3000);
-    }, 1000);
+    toast({
+      title: "Coming Soon!",
+      description: "Newsletter subscription will be available soon. Stay tuned!",
+    });
   };
 
   if (variant === "compact") {
