@@ -1,13 +1,11 @@
-import { useEffect } from "react";
 import { Link } from "wouter";
 import { Card } from "@/components/ui/card";
 import { Map, Home, BookOpen, User, Mail, Shield, FileText, AlertTriangle } from "lucide-react";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function Sitemap() {
-  useEffect(() => {
-    document.title = "Sitemap - AIBlaze";
-  }, []);
-
   const links = [
     { href: "/", label: "Home", icon: Home },
     { href: "/about", label: "About", icon: User },
@@ -20,6 +18,18 @@ export default function Sitemap() {
 
   return (
     <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-x-hidden">
+      <SEOHead
+        title={PAGE_SEO.sitemap.title}
+        description={PAGE_SEO.sitemap.description}
+        keywords={PAGE_SEO.sitemap.keywords}
+        canonical={`${SITE_CONFIG.url}/sitemap`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'Sitemap', url: `${SITE_CONFIG.url}/sitemap` },
+      ]} />
+      
       <div className="max-w-4xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">

@@ -7,6 +7,9 @@
     <meta name="description" content="Learn how to make money smarter, not harder — powered by AI. Discover AI tools, automation strategies, and digital income streams for creators, students, and freelancers." />
     <meta name="keywords" content="AI tools, make money with AI, AI automation, digital income, AI freelancing, ChatGPT earnings, AI productivity" />
     
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE_HERE" />
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aiblaze.com/" />
@@ -21,12 +24,40 @@
     <meta property="twitter:description" content="Learn how to make money smarter, not harder — powered by AI." />
     <meta property="twitter:image" content="/og-image.png" />
     
+    <!-- Canonical Link - dynamically updated per page by SEOHead component -->
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    
+    <!-- Preload Critical Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"></noscript>
+    
+    <!-- Google Analytics (GA4) - Replace with your Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        page_path: window.location.pathname,
+        send_page_view: true
+      });
+    </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) - Fallback for users with JS disabled -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

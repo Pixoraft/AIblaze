@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Twitter, Linkedin, Github, Flame } from "lucide-react";
+import { NewsletterSubscribe } from "@/components/newsletter-subscribe";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,6 +8,13 @@ export function Footer() {
   return (
     <footer className="bg-card border-t border-border mt-24" data-testid="footer">
       <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Newsletter Section */}
+        <div className="mb-12">
+          <div className="max-w-2xl mx-auto">
+            <NewsletterSubscribe variant="default" />
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>

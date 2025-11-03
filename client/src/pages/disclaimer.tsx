@@ -1,14 +1,24 @@
-import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { AlertTriangle } from "lucide-react";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function Disclaimer() {
-  useEffect(() => {
-    document.title = "Disclaimer - AIBlaze";
-  }, []);
-
   return (
     <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-x-hidden">
+      <SEOHead
+        title={PAGE_SEO.disclaimer.title}
+        description={PAGE_SEO.disclaimer.description}
+        keywords={PAGE_SEO.disclaimer.keywords}
+        canonical={`${SITE_CONFIG.url}/disclaimer`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'Disclaimer', url: `${SITE_CONFIG.url}/disclaimer` },
+      ]} />
+      
       <div className="max-w-4xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">

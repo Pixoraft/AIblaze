@@ -1,14 +1,24 @@
 import { Card } from "@/components/ui/card";
 import { Target, Users, Lightbulb, TrendingUp } from "lucide-react";
-import { useEffect } from "react";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function About() {
-  useEffect(() => {
-    document.title = "About Us - AIBlaze";
-  }, []);
-
   return (
     <div className="min-h-screen" data-testid="page-about">
+      <SEOHead
+        title={PAGE_SEO.about.title}
+        description={PAGE_SEO.about.description}
+        keywords={PAGE_SEO.about.keywords}
+        canonical={`${SITE_CONFIG.url}/about`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'About', url: `${SITE_CONFIG.url}/about` },
+      ]} />
+      
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)]" />

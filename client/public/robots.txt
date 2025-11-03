@@ -1,0 +1,25 @@
+# AIBlaze - Robots.txt
+# Allow all search engines to crawl our site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://aiblaze.com/sitemap.xml
+
+# Crawl delay (optional - adjust based on server capacity)
+Crawl-delay: 1
+
+# Disallow admin or sensitive paths (if any in future)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Allow specific search engine bots full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

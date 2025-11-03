@@ -10,15 +10,14 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, CheckCircle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function Contact() {
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
-
-  useEffect(() => {
-    document.title = "Contact Us - AIBlaze";
-  }, []);
 
   const form = useForm<InsertContactMessage>({
     resolver: zodResolver(insertContactMessageSchema),
@@ -57,6 +56,18 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen" data-testid="page-contact">
+      <SEOHead
+        title={PAGE_SEO.contact.title}
+        description={PAGE_SEO.contact.description}
+        keywords={PAGE_SEO.contact.keywords}
+        canonical={`${SITE_CONFIG.url}/contact`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'Contact', url: `${SITE_CONFIG.url}/contact` },
+      ]} />
+      
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.1),transparent_50%)]" />

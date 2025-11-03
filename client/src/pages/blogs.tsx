@@ -8,6 +8,9 @@ import type { Blog } from "@shared/schema";
 import { useEffect, useState, useMemo } from "react";
 import { Search, X } from "lucide-react";
 import { useLocation } from "wouter";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function Blogs() {
   const { data: blogs, isLoading } = useQuery<Blog[]>({
@@ -19,7 +22,6 @@ export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = "All Blogs - AIBlaze";
     
     const params = new URLSearchParams(window.location.search);
     const searchParam = params.get("search");
@@ -61,6 +63,18 @@ export default function Blogs() {
 
   return (
     <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-x-hidden">
+      <SEOHead
+        title={PAGE_SEO.blogs.title}
+        description={PAGE_SEO.blogs.description}
+        keywords={PAGE_SEO.blogs.keywords}
+        canonical={`${SITE_CONFIG.url}/blogs`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'Blogs', url: `${SITE_CONFIG.url}/blogs` },
+      ]} />
+      
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12 w-full" data-testid="section-blogs-header">

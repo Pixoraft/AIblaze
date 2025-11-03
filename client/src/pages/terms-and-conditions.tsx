@@ -1,14 +1,24 @@
-import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { FileText } from "lucide-react";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function TermsAndConditions() {
-  useEffect(() => {
-    document.title = "Terms & Conditions - AIBlaze";
-  }, []);
-
   return (
     <div className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 overflow-x-hidden">
+      <SEOHead
+        title={PAGE_SEO.terms.title}
+        description={PAGE_SEO.terms.description}
+        keywords={PAGE_SEO.terms.keywords}
+        canonical={`${SITE_CONFIG.url}/terms-and-conditions`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'Terms & Conditions', url: `${SITE_CONFIG.url}/terms-and-conditions` },
+      ]} />
+      
       <div className="max-w-4xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">

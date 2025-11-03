@@ -16,6 +16,10 @@ import { insertCommentSchema } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import { queryClient, apiRequest } from "@/lib/queryClient";
+import { SEOHead } from "@/components/seo-head";
+import { BlogPostingStructuredData, BreadcrumbStructuredData, OrganizationStructuredData } from "@/components/structured-data";
+import { SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
+import { AuthorBio } from "@/components/author-bio";
 
 const getImageUrl = (imagePath: string): string => {
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
@@ -161,6 +165,39 @@ export default function BlogDetail() {
 
   return (
     <article className="min-h-screen" data-testid="article-blog-detail">
+      <SEOHead
+        title={`${blog.title} | AIBlaze`}
+        description={blog.excerpt}
+        keywords={`${blog.category}, AI tools, earn money online, ${blog.title}`}
+        canonical={`${SITE_CONFIG.url}/blog/${blog.slug}`}
+        ogType="article"
+        article={{
+          publishedTime: blog.publishedAt,
+          author: 'AIBlaze Team',
+          section: blog.category,
+          tags: [blog.category, 'AI', 'Money', 'Technology'],
+        }}
+      />
+      <BlogPostingStructuredData
+        post={{
+          headline: blog.title,
+          description: blog.excerpt,
+          image: getImageUrl(blog.imagePath),
+          datePublished: blog.publishedAt,
+          author: { name: 'AIBlaze Team' },
+          publisher: ORGANIZATION_SCHEMA,
+          url: `${SITE_CONFIG.url}/blog/${blog.slug}`,
+          keywords: [blog.category, 'AI', 'Money'],
+          articleSection: blog.category,
+        }}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+        { name: 'Blogs', url: `${SITE_CONFIG.url}/blogs` },
+        { name: blog.title, url: `${SITE_CONFIG.url}/blog/${blog.slug}` },
+      ]} />
+      
       {/* Back Button */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
         <Link href="/blogs">
@@ -267,6 +304,11 @@ export default function BlogDetail() {
           data-testid="content-blog"
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
+
+        {/* Author Bio */}
+        <div className="mb-16">
+          <AuthorBio />
+        </div>
 
         {/* Comments Section */}
         <div className="mt-16 mb-12" data-testid="section-comments">

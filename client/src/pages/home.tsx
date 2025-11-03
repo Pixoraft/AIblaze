@@ -6,6 +6,9 @@ import { BlogCard } from "@/components/blog-card";
 import { GraduationCap, DollarSign, TrendingUp, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Blog } from "@shared/schema";
 import { useEffect, useState } from "react";
+import { SEOHead } from "@/components/seo-head";
+import { OrganizationStructuredData, BreadcrumbStructuredData, WebSiteStructuredData } from "@/components/structured-data";
+import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 interface Slide {
   id: string;
@@ -104,6 +107,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title={PAGE_SEO.home.title}
+        description={PAGE_SEO.home.description}
+        keywords={PAGE_SEO.home.keywords}
+        canonical={`${SITE_CONFIG.url}/`}
+        ogImage={`${SITE_CONFIG.url}${SITE_CONFIG.ogImage}`}
+      />
+      <OrganizationStructuredData organization={ORGANIZATION_SCHEMA} />
+      <WebSiteStructuredData />
+      <BreadcrumbStructuredData items={[
+        { name: 'Home', url: `${SITE_CONFIG.url}/` },
+      ]} />
+      
       {/* Hero Slider Section */}
       <section
         className="relative min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden"
