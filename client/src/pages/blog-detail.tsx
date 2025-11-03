@@ -174,11 +174,11 @@ export default function BlogDetail() {
       </div>
 
       {/* Hero Image */}
-      <div className="w-full aspect-video max-w-6xl mx-auto mb-12 overflow-hidden rounded-2xl">
+      <div className="w-full aspect-video max-w-6xl mx-auto mb-8 sm:mb-12 px-4 sm:px-6">
         <img
           src={getImageUrl(blog.imagePath)}
           alt={blog.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-lg sm:rounded-2xl"
           data-testid="img-blog-hero"
         />
       </div>
