@@ -101,9 +101,22 @@ export default function Home() {
     setCurrentSlide(index);
   };
 
-  const { data: featuredBlogs, isLoading } = useQuery<Blog[]>({
-    queryKey: ["/api/blogs/featured"],
-  });
+  const [featuredBlogs, setFeaturedBlogs] = useState<Blog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/blogs-data.json')
+      .then(res => res.json())
+      .then((blogs: Blog[]) => {
+        const featured = blogs.filter(blog => blog.featured === 1);
+        setFeaturedBlogs(featured);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading blogs:', err);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen">

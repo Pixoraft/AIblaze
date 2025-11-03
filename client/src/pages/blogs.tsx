@@ -13,13 +13,24 @@ import { OrganizationStructuredData, BreadcrumbStructuredData } from "@/componen
 import { PAGE_SEO, SITE_CONFIG, ORGANIZATION_SCHEMA } from "@/lib/seo-config";
 
 export default function Blogs() {
-  const { data: blogs, isLoading } = useQuery<Blog[]>({
-    queryKey: ["/api/blogs"],
-  });
-  
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/blogs-data.json')
+      .then(res => res.json())
+      .then((data: Blog[]) => {
+        setBlogs(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading blogs:', err);
+        setIsLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     

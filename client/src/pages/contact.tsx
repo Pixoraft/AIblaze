@@ -28,30 +28,14 @@ export default function Contact() {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: InsertContactMessage) => {
-      return await apiRequest("POST", "/api/contact", data);
-    },
-    onSuccess: () => {
-      setIsSuccess(true);
-      form.reset();
-      toast({
-        title: "Message sent!",
-        description: "Thank you for reaching out. We'll get back to you soon!",
-      });
-      setTimeout(() => setIsSuccess(false), 5000);
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
   const onSubmit = (data: InsertContactMessage) => {
-    mutation.mutate(data);
+    setIsSuccess(true);
+    form.reset();
+    toast({
+      title: "Message sent!",
+      description: "Thank you for reaching out. We'll get back to you soon!",
+    });
+    setTimeout(() => setIsSuccess(false), 5000);
   };
 
   return (

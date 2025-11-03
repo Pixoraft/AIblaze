@@ -32,21 +32,35 @@ export default function BlogDetail() {
   const [, params] = useRoute("/blog/:slug");
   const { toast } = useToast();
   const [copiedLink, setCopiedLink] = useState(false);
+  const [blog, setBlog] = useState<Blog | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>([]);
+  const [comments] = useState<Comment[]>([]);
+  const commentsLoading = false;
 
-  const { data: blog, isLoading } = useQuery<Blog>({
-    queryKey: [`/api/blogs/${params?.slug}`],
-    enabled: !!params?.slug,
-  });
-
-  const { data: relatedBlogs } = useQuery<Blog[]>({
-    queryKey: [`/api/blogs/related/${blog?.id}`],
-    enabled: !!blog?.id,
-  });
-
-  const { data: comments, isLoading: commentsLoading } = useQuery<Comment[]>({
-    queryKey: [`/api/comments`, blog?.id],
-    enabled: !!blog?.id,
-  });
+  useEffect(() => {
+    if (!params?.slug) return;
+    
+    fetch('/blogs-data.json')
+      .then(res => res.json())
+      .then((blogs: Blog[]) => {
+        const foundBlog = blogs.find(b => b.slug === params.slug);
+        setBlog(foundBlog || null);
+        
+        if (foundBlog) {
+          const related = blogs
+            .filter(b => b.id !== foundBlog.id && b.category === foundBlog.category)
+            .slice(0, 2);
+          setRelatedBlogs(related);
+        }
+        
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading blog:', err);
+        setIsLoading(false);
+      });
+  }, [params?.slug]);
 
   const form = useForm<InsertComment>({
     resolver: zodResolver(insertCommentSchema),
