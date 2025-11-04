@@ -11,8 +11,9 @@ import blog7 from "../blogs/blog-future-jobs-ai-skills-highest-pay.json" with { 
 import blog8 from "../blogs/blog-start-freelancing-with-chatgpt.json" with { type: "json" };
 import blog9 from "../blogs/blog-students-earn-money-ai-10000-month.json" with { type: "json" };
 import blog10 from "../blogs/blog-top-free-ai-websites-youtubers.json" with { type: "json" };
+import blog11 from "../blogs/blog-10-ai-tools-indian-content-creator-monetise-2025.json" with { type: "json" };
 
-const rawBlogs = [blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10];
+const rawBlogs = [blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog11];
 
 export const blogData: Blog[] = rawBlogs.map((blogData) => ({
   id: blogData.id || randomUUID(),
