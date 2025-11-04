@@ -1,30 +1,39 @@
 import { type Blog } from "@shared/schema";
 import { randomUUID } from "crypto";
+import { readdirSync, readFileSync } from "fs";
+import { join } from "path";
 
-import blog1 from "../blogs/blog-10-best-ai-tools-to-earn-money-2025.json" with { type: "json" };
-import blog2 from "../blogs/blog-ai-chrome-extensions-save-hours.json" with { type: "json" };
-import blog3 from "../blogs/blog-ai-tools-replace-employees.json" with { type: "json" };
-import blog4 from "../blogs/blog-ai-vs-human-creativity-who-wins.json" with { type: "json" };
-import blog5 from "../blogs/blog-build-personal-brand-using-ai.json" with { type: "json" };
-import blog6 from "../blogs/blog-create-website-using-ai-30-minutes.json" with { type: "json" };
-import blog7 from "../blogs/blog-future-jobs-ai-skills-highest-pay.json" with { type: "json" };
-import blog8 from "../blogs/blog-start-freelancing-with-chatgpt.json" with { type: "json" };
-import blog9 from "../blogs/blog-students-earn-money-ai-10000-month.json" with { type: "json" };
-import blog10 from "../blogs/blog-top-free-ai-websites-youtubers.json" with { type: "json" };
-import blog11 from "../blogs/blog-10-ai-tools-indian-content-creator-monetise-2025.json" with { type: "json" };
+function loadBlogsFromDirectory(): Blog[] {
+  const blogsDir = join(process.cwd(), "blogs");
+  const files = readdirSync(blogsDir).filter(file => file.endsWith(".json"));
+  
+  const blogs: Blog[] = [];
+  
+  for (const file of files) {
+    try {
+      const filePath = join(blogsDir, file);
+      const fileContent = readFileSync(filePath, "utf-8");
+      const blogData = JSON.parse(fileContent);
+      
+      blogs.push({
+        id: blogData.id || randomUUID(),
+        slug: blogData.slug,
+        title: blogData.title,
+        excerpt: blogData.excerpt,
+        content: blogData.content,
+        author: blogData.author || "AIBlaze Team",
+        category: blogData.category,
+        imagePath: blogData.imagePath,
+        readTime: blogData.readTime || 5,
+        featured: blogData.featured || 0,
+        publishedAt: blogData.publishedAt,
+      });
+    } catch (error) {
+      console.error(`Error loading blog file ${file}:`, error);
+    }
+  }
+  
+  return blogs;
+}
 
-const rawBlogs = [blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog11];
-
-export const blogData: Blog[] = rawBlogs.map((blogData) => ({
-  id: blogData.id || randomUUID(),
-  slug: blogData.slug,
-  title: blogData.title,
-  excerpt: blogData.excerpt,
-  content: blogData.content,
-  author: blogData.author || "AIBlaze Team",
-  category: blogData.category,
-  imagePath: blogData.imagePath,
-  readTime: blogData.readTime || 5,
-  featured: blogData.featured || 0,
-  publishedAt: blogData.publishedAt,
-}));
+export const blogData: Blog[] = loadBlogsFromDirectory();
