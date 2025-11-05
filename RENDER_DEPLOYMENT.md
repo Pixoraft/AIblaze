@@ -26,7 +26,7 @@ AIBlaze is a **full-stack application** with a Node.js backend that serves API e
 
 **Build Command:**
 ```bash
-npm install && npm run build
+npm install && node scripts/generate-blogs-json.js && npm run build
 ```
 
 **Start Command:**
@@ -46,9 +46,10 @@ Click **"Create Web Service"**
 
 The deployment will:
 1. Install dependencies
-2. Build the frontend and backend
-3. Start the Express server on port 5000
-4. Serve both the React frontend AND the API endpoints
+2. Generate blogs-data.json from individual blog JSON files
+3. Build the frontend and backend
+4. Start the Express server on port 5000
+5. Serve both the React frontend AND the API endpoints
 
 ## Why Web Service Instead of Static Site?
 
@@ -77,3 +78,14 @@ If blogs still don't load:
 2. Ensure the "Start Command" is `npm start` (not `npm run dev`)
 3. Verify the build completed successfully
 4. Make sure you're deploying from the `main` branch with the latest changes
+5. **IMPORTANT:** Make sure the Build Command includes `node scripts/generate-blogs-json.js` before `npm run build`
+
+## How Blog Updates Work
+
+When you add, edit, or delete blog JSON files in the `blogs/` folder:
+1. Commit and push to GitHub
+2. Render will automatically deploy
+3. During build, `scripts/generate-blogs-json.js` consolidates all blog JSONs into `client/public/blogs-data.json`
+4. Your website reads from this consolidated file
+
+**If your blog changes aren't showing:** You need to update the Build Command on Render to include the blog generation script (see Step 3 above).

@@ -103,12 +103,29 @@ Set `"featured": 0` for regular blog posts.
 **Blog not showing up?**
 1. Check the JSON syntax (use jsonlint.com)
 2. Ensure all required fields are present
-3. Check Render deployment logs
-4. Wait 2-3 minutes for deployment
+3. **IMPORTANT:** Make sure your Render Build Command is: `npm install && node scripts/generate-blogs-json.js && npm run build`
+4. Check Render deployment logs
+5. Wait 2-3 minutes for deployment
+6. Clear browser cache and hard refresh (Ctrl+Shift+R)
 
 **Image not loading?**
 - Use full URLs for external images
 - Or upload to your CDN and use the path
+
+## ⚙️ First-Time Setup on Render
+
+If blogs aren't updating automatically, you need to update your Render Build Command:
+
+1. Go to Render Dashboard
+2. Select your web service
+3. Go to **Settings** → **Build & Deploy**
+4. Update **Build Command** to:
+   ```
+   npm install && node scripts/generate-blogs-json.js && npm run build
+   ```
+5. Save and redeploy
+
+This ensures blog JSON files are consolidated before each deployment.
 
 ---
 
